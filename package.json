@@ -1,10 +1,10 @@
 {
   "name": "atividade4",
   "version": "1.0.0",
-  "description": "��#\u0000 \u0000A\u0000t\u0000i\u0000v\u0000i\u0000d\u0000a\u0000d\u0000e\u00004\u0000\r\u0000 \u0000",
-  "main": "index.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "devStart": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Joca01/Atividade4/issues"
   },
-  "homepage": "https://github.com/Joca01/Atividade4#readme"
+  "homepage": "https://github.com/Joca01/Atividade4#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
+  }
 }
