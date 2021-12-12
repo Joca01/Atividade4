@@ -13,6 +13,13 @@
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
   }
+  
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
 
   h4 {
     color: #ffffff;

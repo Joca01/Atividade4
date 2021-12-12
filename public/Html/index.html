@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-  <title>Atividade 3</title>
+  <title>Atividade 4</title>
   <link rel="stylesheet" type="text/css" href="/Css/index.css" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,13 +19,13 @@
 <header>
   <div style="margin: 5px; text-align: right;">
     <!-- Register trigger modal -->
-    <button type="button" id="btnModalRegister" class="btn btn-primary btn-wrapper" data-bs-toggle="modal"
+    <button type="button" id="btnModalRegister" class="btn btn-secondary btn-wrapper" data-bs-toggle="modal"
       data-bs-target="#modalRegistar">
       Register
     </button>
 
     <!-- Register trigger modal -->
-    <button style="margin: 20px;" type="button" class="btn btn-primary btn-wrapper" data-bs-toggle="modal"
+    <button style="margin: 20px;" type="button" class="btn btn-secondary btn-wrapper" data-bs-toggle="modal"
       data-bs-target="#modalLogin">
       Login
     </button>
@@ -33,31 +33,34 @@
 </header>
 
 
-<!-- <body style="background-image: url('https://c.tenor.com/MCtlzqgI2c8AAAAC/gargantua-interstellar.gif');background-repeat: no-repeat; background-size: 100% 130%; background-attachment: fixed;"> -->
+<body
+  style="background-image: url('https://c.tenor.com/MCtlzqgI2c8AAAAC/gargantua-interstellar.gif');background-repeat: no-repeat; background-size: 100% 130%; background-attachment: fixed;">
 
-<body>
+  <!-- <body> -->
   <a id="nav-expand" href="#">
     <span class="icon icon-menu"></span>&nbsp;
     Menu
   </a>
   <nav>
-    <h4>Menu</h4>
+    <h4 style="padding: 0px 15px;">Menu</h4>
     <a id="nav-collapse" href="#">
       <span class="icon icon-cross"></span>
     </a>
     <a href="#" ; onClick="
-            parent.location='http://localhost:8080/sciencenews'">Science News</a>
+            parent.location='http://localhost:8080/api/sciencenews'">Science News</a>
     <a href="#" ; onClick="
-            parent.location='http://localhost:8080/astronomy-com'">Astronomy.com</a>
+            parent.location='http://localhost:8080/api/astronomy'">Astronomy.com</a>
     <a href="#" ; onClick="
-            parent.location='http://localhost:8080/space-com'">Space.com</a>
+            parent.location='http://localhost:8080/api/space-com'">Space.com</a>
     <a href="#" ; onClick="
-            parent.location='http://localhost:8080/airspacemag'">AirSpaceMag</a>
+            parent.location='http://localhost:8080/api/airspacemag'">AirSpaceMag</a>
   </nav>
 
   <main>
-    <h2>Atividade 4</h2>
-    <p>API de notícias relacioandas com o Espaço e o Universo<br></p>
+    <div style="color: white;">
+      <h2>Atividade 4</h2>
+      <p>API de notícias relacioandas com o Espaço e o Universo<br></p>
+    </div>
 
     <!-- Register -->
     <div class="modal fade" id="modalRegistar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -83,7 +86,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary btn-wrapper float-end" id="btnSubmitRegistar">
+              <button type="button" class="btn btn-primary btn-wrapper float-end" id="btnSubmitRegistar">
                 Submeter
               </button>
             </div>
@@ -113,7 +116,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-secondary btn-wrapper float-end" id="btnSubmitRegistar">
+            <button class="btn btn-primary btn-wrapper float-end" id="btnSubmitRegistar">
               Submeter
             </button>
           </div>
@@ -121,26 +124,20 @@
       </div>
     </div>
 
-    <!-- <div class="block" style="padding: 0px 365px;">
-      <img src="/images/science_news_logo.png" style="height: 30%;">
-      <img src="/images/science_news_logo.png" style="height: 30%;">
-      <img src="/images/science_news_logo.png" style="height: 30%;">
-    </div> -->
-
-    <div class="row">
+    <div class="row" style="margin: 10px; padding: 50px 0px;">
       <div class="col">
-        <img src="/images/science_news_logo.png" style="width: 30%;">
+        <img class="center" src="/images/science_news_logo.png" style="width: 50%;">
       </div>
       <div class="col">
-        <img src="/images/science_news_logo.png" style="width: 30%;">
+        <img class="center" src="/images/astronomy_logo.png" style="width: 50%;">
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <img src="/images/science_news_logo.png" style="width: 30%;">
+        <img class="center" src="/images/space-com_logo.png" style="width: 50%;">
       </div>
       <div class="col">
-        <img src="/images/science_news_logo.png" style="width: 30%;">
+        <img class="center" src="/images/airspacemag_logo.jpg" style="width: 50%;">
       </div>
     </div>
     </div>
@@ -152,28 +149,22 @@
   <script>
     // Variaveis DOM
     let registerForm = document.getElementById("btnSubmitRegistar")
-    //let alert = document.getElementById("alert")
-    //let alert_warning = document.getElementById("warning")
 
-    // Evento de register
+    // Script para registar um utilziador
     registerForm.addEventListener("click", () => {
       let username = document.getElementById("usernameRegister").value
       let password = document.getElementById("senhaRegister").value
 
       if (username === '' || password === '') {
-        // alert_warning.classList.add('is-visible')
-        // setTimeout(() => {
-        //   alert_warning.classList.remove('is-visible')
-        // }, 2500)
         window.alert('Preencha todos os campos')
       }
       else {
-        let authentication = {
+        let auth_data = {
           'username': username,
           'password': password
         }
 
-        let auth = JSON.stringify(authentication)
+        let auth = JSON.stringify(auth_data)
 
         fetch('/api/register', {
           method: 'POST',
@@ -183,8 +174,8 @@
           body: auth,
         }).then((response) => {
           if (response.status == 201) {
-           window.alert('Utilizador Registado com sucesso')
-
+            window.alert(`Utilizador Registado com sucesso 
+Bem vindo ${username}`)
           }
         }).catch((err) => { console.log(err) })
       }

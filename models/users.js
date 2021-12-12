@@ -21,3 +21,16 @@ exports.crud_register = (username, password) => {
         })
     })
 }
+
+exports.crud_login = (username) => {
+    return new Promise((resolve, reject) => {
+        db.users.findOne({username: username}, (err, dados) => {
+            if(err){
+                reject(null)
+            }
+            else{
+                resolve(dados)
+            }
+        })
+    })
+}
