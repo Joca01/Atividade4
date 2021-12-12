@@ -51,7 +51,7 @@
     <a href="#" ; onClick="
             parent.location='http://localhost:8080/api/astronomy'">Astronomy.com</a>
     <a href="#" ; onClick="
-            parent.location='http://localhost:8080/api/space-com'">Space.com</a>
+            parent.location='http://localhost:8080/api/space'">Space.com</a>
     <a href="#" ; onClick="
             parent.location='http://localhost:8080/api/airspacemag'">AirSpaceMag</a>
   </nav>
@@ -76,13 +76,11 @@
                 <label class="form-label">Username</label>
                 <input type="text" class="form-control" id="usernameRegister" name="usernameRegistar"
                   placeholder="Username" />
-                <p id="emailErroLoginRegistar"></p>
               </div>
               <div class="mb-3">
                 <label class="form-label">Password</label>
                 <input type="password" class="form-control" id="senhaRegister" name="senhaRegistar"
                   placeholder="Password" />
-                <p id="statusRegistar"></p>
               </div>
             </div>
             <div class="modal-footer">
@@ -100,23 +98,21 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalTitle">Register</h5>
+            <h5 class="modal-title" id="modalTitle">Login</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
               <label class="form-label">Username</label>
-              <input class="form-control" id="usernameLogin" name="usernameRegistar" placeholder="Username" />
-              <p id="emailErroLoginRegistar"></p>
+              <input class="form-control" id="usernameLogin" name="usernameLogin" placeholder="Username" />
             </div>
             <div class="mb-3">
               <label class="form-label">Password</label>
-              <input type="password" class="form-control" id="senhaLogin" name="senhaRegistar" placeholder="Password" />
-              <p id="statusRegistar"></p>
+              <input type="password" class="form-control" id="senhaLogin" name="senhaLogin" placeholder="Password" />
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-primary btn-wrapper float-end" id="btnSubmitRegistar">
+            <button class="btn btn-primary btn-wrapper float-end" id="btnSubmitLogin">
               Submeter
             </button>
           </div>
@@ -175,12 +171,54 @@
         }).then((response) => {
           if (response.status == 201) {
             window.alert(`Utilizador Registado com sucesso 
-Bem vindo ${username}`)
+Utilizador ${username}`)
+            location.reload()
           }
         }).catch((err) => { console.log(err) })
       }
     })
   </script>
+
+  <script>
+    // Variavei DOM
+    let loginForm = document.getElementById("btnSubmitLogin")
+
+    loginForm.addEventListener('click', () => {
+      let username = document.getElementById("usernameLogin").value
+      let password = document.getElementById("senhaLogin").value
+
+      if (password == '' || username == '') {
+        window.alert('Preencha todos os campos')
+      }
+      else {
+        let authentication = {
+          'username': username,
+          'password': password
+        }
+        let auth = JSON.stringify(authentication)
+
+        fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: auth,
+
+        }).then(async (response) => {
+          if (response.status == 403) {
+            window.alert('Utilizador ou palavra passe incorreta')
+          }
+          else if (response.status == 200) {
+            const auth = await response.json()
+            window.alert(`Login com sucesso 
+Bem vindo ${username}`)
+            location.reload()
+          }
+        }).catch((err) => { console.log(err) })
+      }
+    })
+  </script>
+
 </body>
 
 </html>

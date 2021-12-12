@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 })
 
 // app.get('/sciencenews', (req, res) => {
-//     //res.sendFile(path.join(__dirname + '/public/Html/sciencenews.html'))
+//     res.sendFile(path.join(__dirname + '/public/Html/sciencenews.html'))
 // })
 
 // app.get('/astronomy-com', (req, res) => {

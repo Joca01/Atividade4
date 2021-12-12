@@ -5,9 +5,7 @@ const db = require('../models/users')
 const bcrypt = require('bcrypt')
 const cookieParser = require("cookie-parser")
 const { createTokens, validateToken } = require("../public/JS/JWT")
-const jwt = require('jsonwebtoken')
-
-    app.use(cookieParser())
+app.use(cookieParser())
 
 
 // Registar utilizador
@@ -40,14 +38,15 @@ exports.login = async (req, res) => {
                     res.status(401).send({ message: 'User not Found' })
                 } else {
                     bcrypt.compare(auth.password, dados.password, (err, result) => {
-                        if (dados === null ) {
-                            res.status(403).json({ error: "Wrong username and password combination" })
-                        } else {
+                        if (result) {
                             const accessToken = createTokens(auth.username)
                             res.cookie("access-token", accessToken, {
                                 maxAge: 60 * 60 * 24 * 30 * 1000,
                                 httpOnly: true,
                             })
+                            res.json("Logged in")
+                        } else {
+                            res.status(403).json({ error: "Wrong username and password combination" })
                         }
                     })
                 }
